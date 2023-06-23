@@ -1,53 +1,60 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWeather, selectWeather, fetchGeocoding } from "../store/weatherSlice";
+import { fetchWeather, selectWeather, selectCity } from "../store/weatherSlice";
 import WeatherCard from "./WeatherCard";
 import WeatherCardDaily from "./WeatherDailyCard";
 
 const Weather = () => {
 
     const dispatch = useDispatch()
+    const [city, setCity] = useState('Yonkers')
 
     useEffect(()=>{
-        dispatch(fetchWeather())
-    },[dispatch])
+        dispatch(fetchWeather(city))
+    },[dispatch, city])
 
+    const weather = useSelector(selectWeather)
     
     const [selected, setSelected] = useState("")
-   
+    let liKeys = [1,2,3,4,5,6]
+
+
 
     const handleClick = (e) => {
         setSelected(e.target.innerText)
-        dispatch(fetchGeocoding())
-        console.log(e.target.innerText)
-        console.log(e.target.className)
+        setCity(e.target.id)
+        console.log(e.target.id)
+
     }
 
     
 
     
     
-    const weather = useSelector(selectWeather)
+    
     return (
             <div id="weather-widget">
                 {weather.loading ? <p>loading</p> : (
                 <div>
                     <div id="cities">
-                        <h2 className={selected === "Westchester" ? "h2selected" : "h2weather"} onClick={(e)=>(handleClick(e))}>Westchester</h2>
-                        <h2 className={selected === "Los Angeles" ? "h2selected" : "h2weather"} onClick={(e)=>(handleClick(e))}>Los Angeles</h2>
-                        <h2 className={selected === "Wilmington" ? "h2selected" : "h2weather"}  onClick={(e)=>(handleClick(e))}>Wilmington</h2>
+                        <h2 id="Yonkers" className={selected === "Yonkers" ? "h2selected" : "h2weather"} onClick={(e)=>(handleClick(e))}>Yonkers</h2>
+                        <h2 id="Los_Angeles"className={selected === "Los Angeles" ? "h2selected" : "h2weather"} onClick={(e)=>(handleClick(e))}>Los Angeles</h2>
+                        <h2 id="Dublin" className={selected === "Dublin" ? "h2selected" : "h2weather"}  onClick={(e)=>(handleClick(e))}>Dublin</h2>
                     </div>
                     <h2>{Math.round(weather.data.current.temp)}°F</h2>
                     <h3>Humidty: {weather.data.current.humidity}</h3>
                     <section>
                         <ul id="hourly-weather">
                             {weather.data.hourly.slice(1,6).map((hour)=>{
-                                return <WeatherCard hour={hour}/>
+                                return <li key={hour.dt}><WeatherCard hour={hour}/></li>
                             })}
                         </ul>
                         <ul id="hourly-weather">
-                            {weather.data.daily.slice(1,5).map((day)=>{
-                                return <WeatherCardDaily day={day} />
+                            {weather.data.daily.slice(1,6).map((day)=>{
+                                return (
+                                <li key={day.dt}><WeatherCardDaily day={day} /></li>
+                                
+                                )
                             })}
                         </ul>
                     </section>

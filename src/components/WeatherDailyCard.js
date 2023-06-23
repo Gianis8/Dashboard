@@ -15,7 +15,7 @@ const WeatherCardDaily = (props) => {
     return (
         <div>
             <h3>{displayDay}</h3>
-            <h3>{day.temp.day}°F</h3>
+            <h3>{Math.round(day.temp.day)}°F</h3>
         </div>
     )
 }

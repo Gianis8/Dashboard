@@ -1,6 +1,7 @@
 *{
   font-style: oblique;
   font-weight: 300;
+  list-style: none;
 }
 #weather-widget{
   margin: 40px;
@@ -25,7 +26,7 @@
   justify-content: space-around;
   align-self: center;
   margin: 20px;
-  width: 50vw;
+  width: 400px;
 }
 
 #add-input{
@@ -41,6 +42,7 @@
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-wrap: wrap;
   background-image: linear-gradient(to top right, rgb(48, 46, 43), beige );
 }
 #ToDos-widget {
