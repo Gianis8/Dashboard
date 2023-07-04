@@ -24,7 +24,7 @@ export const AddTask = () => {
     return (
         <form id="add-task">
             <input id="add-input" type="text" placeholder="To Do" name="task" value={title} onChange={handleChange} ></input>
-            <button onClick={(e) => { handleClick(e) }}>ADD</button>
+            <button className="task-button" onClick={(e) => { handleClick(e) }}>ADD</button>
         </form>
 
 

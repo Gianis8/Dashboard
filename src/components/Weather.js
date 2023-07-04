@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWeather, selectWeather, selectCity } from "../store/weatherSlice";
+import { fetchWeather, selectWeather } from "../store/weatherSlice";
 import WeatherCard from "./WeatherCard";
 import WeatherCardDaily from "./WeatherDailyCard";
 
@@ -16,7 +16,7 @@ const Weather = () => {
     const weather = useSelector(selectWeather)
     
     const [selected, setSelected] = useState("")
-    let liKeys = [1,2,3,4,5,6]
+    
 
 
 

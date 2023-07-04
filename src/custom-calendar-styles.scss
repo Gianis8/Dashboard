@@ -1,0 +1,14 @@
+@import '~react-big-calendar/lib/sass/styles';
+@import '~react-big-calendar/lib/addons/dragAndDrop/styles';
+
+.rbc-day-bg.rbc-today {
+    background-color: cadetblue;
+}
+
+.rbc-day-bg.rbc-off-range-bg {
+    background-color: dimgray;
+}
+
+.rbc-day-bg {
+    background-color: darkslategray;
+}
