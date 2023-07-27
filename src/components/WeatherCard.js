@@ -2,7 +2,7 @@ import React from "react";
 
 const WeatherCard = (props) => {
     const hour = props.hour
-    console.log(hour)
+   
 
  
    

@@ -7,13 +7,10 @@ const APIKey = "708c105e2d6e0e2c4247044efc5e07a4"
 
 export const fetchWeather = createAsyncThunk('fetchWeather', async (city) => {
     try {
-        console.log(city)
         const cords = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=${APIKey}`)
         const answer = cords.data[0]
-        console.log(answer)
         const weather = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${answer.lat}&lon=${answer.lon}&units=imperial&appid=${APIKey}`)
         const response = weather.data
-        console.log(response)
         return response
     } catch (error) {
         throw error

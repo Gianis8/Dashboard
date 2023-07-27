@@ -15,7 +15,7 @@ const Weather = () => {
 
     const weather = useSelector(selectWeather)
     
-    const [selected, setSelected] = useState("")
+    const [selected, setSelected] = useState("Yonkers")
     
 
 
@@ -23,7 +23,7 @@ const Weather = () => {
     const handleClick = (e) => {
         setSelected(e.target.innerText)
         setCity(e.target.id)
-        console.log(e.target.id)
+       
 
     }
 
@@ -41,10 +41,10 @@ const Weather = () => {
                         <h2 id="Los_Angeles"className={selected === "Los Angeles" ? "h2selected" : "h2weather"} onClick={(e)=>(handleClick(e))}>Los Angeles</h2>
                         <h2 id="Dublin" className={selected === "Dublin" ? "h2selected" : "h2weather"}  onClick={(e)=>(handleClick(e))}>Dublin</h2>
                     </div>
-                    <h2>{Math.round(weather.data.current.temp)}°F</h2>
-                    <h3>Humidty: {weather.data.current.humidity}</h3>
+                    <h2 style={{margin:"10px"}}>{Math.round(weather.data.current.temp)}°F</h2>
+                    <h3 >Humidty: {weather.data.current.humidity}</h3>
                     <section>
-                        <ul id="hourly-weather">
+                        <ul id="hourly-weather" style={{marginBottom:"60px"}}>
                             {weather.data.hourly.slice(1,6).map((hour)=>{
                                 return <li key={hour.dt}><WeatherCard hour={hour}/></li>
                             })}

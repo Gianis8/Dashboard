@@ -33,12 +33,12 @@ const MyCalendar = (props) => {
     return (
         <div className="calendar-widget">
             
-            <div style={{ margin:'20px',display:"flex",flexDirection:"column" }}>
+            <div style={{ height:"300px", margin:'20px',display:"flex",flexDirection:"column",justifyContent:"space-evenly" }}>
             <h3>Add Event</h3>
             <input type="text" placeholder="Add Title" style={{width:"100px"}} value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}></input>
             <DatePicker placeholderText="Start Date" style={{margin:"10px"}} selected={newEvent.start} onChange={(start)=> setNewEvent({...newEvent, start})}/>
             <DatePicker placeholderText="End Date" style={{margin:"10px", color:"alicelue"}} selected={newEvent.end} onChange={(end)=> setNewEvent({...newEvent, end})}/>
-            <button style={{width:"100px"}}onClick={handleAddEvents}>Add Event</button>
+            <button style={{width:"100px", color:"black"}}onClick={handleAddEvents}>Add Event</button>
             </div>
 
             <Calendar

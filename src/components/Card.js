@@ -18,13 +18,17 @@ const Card = (props) => {
         setDone('card-done')
     }
 
-    
+    const handleUndo = () => {
+        setDone('card')
+    }
+
+
 
     return (
         <div className={done} style={{ display: "flex" }}>
             <h1 style={{ alignSelf: "center" }}>{props.task}</h1>
-            <button style={{ alignSelf: "center" }}onClick={handleDone}>Done</button>
-            <button style={{ alignSelf: "center", width: "100px" }} onClick={handleDelete}>DELETE</button>
+            {done === 'card-done' ? <button style={{ alignSelf: "center", color: "black" }} onClick={handleUndo}>UNDO</button> : <button style={{ alignSelf: "center", color: "black" }} onClick={handleDone}>DONE</button>}
+            <button style={{ alignSelf: "center", width: "100px", color: "black" }} onClick={handleDelete}>DELETE</button>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import  todoSlice  from './ToDoslice'
 import weatherSlice from './weatherSlice'
+import openaiSlice from './OpenAiSlice'
 
 
 
@@ -11,8 +12,10 @@ import weatherSlice from './weatherSlice'
 const store = configureStore({
   reducer: {
     todo:todoSlice,
-    weather:weatherSlice
+    weather:weatherSlice,
+    openai:openaiSlice
   },
+
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({
     serializableCheck: {

@@ -21,6 +21,7 @@
 
 #hourly-weather{
   display: flex;
+  margin: 20px;
   flex-direction: row;
   justify-content: space-between;
 }
@@ -39,6 +40,8 @@
 
 #add-input{
   background-color:rgb(101, 97, 91) ;
+  color: aliceblue;
+  padding: 8px;
   border-radius: 3px;
   border-style: none;
   box-shadow: none;
@@ -103,3 +106,8 @@
   display: flex;
 }
 
+.react-datepicker__tab-loop{
+  z-index: 1000;
+  position: fixed;
+  background-color: aqua;
+}
