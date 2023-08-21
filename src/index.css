@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-done {
+        @apply flex bg-green-500 p-3 border-2 border-slate-400 rounded my-3;
+    }
+
+    .btn {
+        @apply flex p-3 border-2 border-slate-400 rounded my-3;
+    }
+}
+
+input::placeholder {
+    color: slategray;
+}

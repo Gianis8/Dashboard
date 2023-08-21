@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import DatePicker from 'react-datepicker'
-import '../custom-calendar-styles.scss'
 import "react-datepicker/dist/react-datepicker.css"
 
 const MyCalendar = (props) => {

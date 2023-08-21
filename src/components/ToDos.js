@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from './Card'
-import "../App.css"
 import { useSelector } from 'react-redux'
 import { selectTasks } from '../store/ToDoslice'
 import AddTask from './AddTask'
@@ -9,9 +8,9 @@ const ToDos = () => {
     const tasks = useSelector(selectTasks)
     
     return (
-        <div id='ToDos-widget'>
+        <div className='flex-col rounded-xl shadow-lg h-72 max-w-md m-4 p-4 bg-primary'>
         <AddTask></AddTask>
-        <ul >{
+        <ul className="m-2">{
             tasks.map((task) => {
                 return <Card task={task}></Card>
             })

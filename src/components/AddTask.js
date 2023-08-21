@@ -22,9 +22,9 @@ export const AddTask = () => {
     }
 
     return (
-        <form id="add-task">
-            <input id="add-input" type="text" placeholder="To Do" name="task" value={title} onChange={handleChange} ></input>
-            <button className="task-button" onClick={(e) => { handleClick(e) }}>ADD</button>
+        <form className="flex w-72 content-start justify-between  h-7">
+            <input className=" border-2 border-secondary p-1 rounded shadow-sm text-secondary outline-secondary"type="text" placeholder="To Do" name="task" value={title} onChange={handleChange} ></input>
+            <button className="w-12 rounded-md shadow border-2 border-secondary" onClick={(e) => { handleClick(e) }}>Add</button>
         </form>
 
 

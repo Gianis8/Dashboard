@@ -6,7 +6,7 @@ const WeatherCardDaily = (props) => {
     const UTCdate = new Date( day.dt*1000 )
 
     const options = {
-        weekday: "long",
+        weekday: "short",
         timeZone: "America/New_York"
     }
     const displayDay = new Intl.DateTimeFormat('en-US', options).format(UTCdate)

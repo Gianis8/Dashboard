@@ -23,7 +23,6 @@
     "react-redux": "^8.0.7",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "tailwindcss": "^3.3.2",
     "url": "^0.11.1",
     "web-vitals": "^2.1.4"
   },
@@ -59,6 +58,7 @@
     "path": "^0.12.7",
     "querystring": "^0.2.1",
     "stream": "^0.0.2",
+    "tailwindcss": "^3.3.3",
     "zlib": "^1.0.5"
   }
 }
