@@ -15,3 +15,7 @@
 input::placeholder {
     color: slategray;
 }
+
+body {
+    background-color: rgb(13, 13, 16);
+}

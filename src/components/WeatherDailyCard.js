@@ -12,7 +12,7 @@ const WeatherCardDaily = (props) => {
     const displayDay = new Intl.DateTimeFormat('en-US', options).format(UTCdate)
 
     return (
-        <div>
+        <div className="w-16">
             <h3>{displayDay}</h3>
             <h3>{Math.round(day.temp.day)}°F</h3>
         </div>

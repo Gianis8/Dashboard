@@ -11,9 +11,9 @@ const WeatherCard = (props) => {
     const displayHour = new Intl.DateTimeFormat('en-US', options).format(date)
     
     return(
-        <div className="fl">
-            <h3>{displayHour}</h3>
-            <h3>{Math.round(hour.feels_like * 10)/10}°F</h3>
+        <div>
+            <h3 className="w-16">{displayHour}</h3>
+            <h3>{Math.round(hour.feels_like)}°F</h3>
         </div>
     )
 }

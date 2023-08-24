@@ -22,8 +22,8 @@ const Chat = () => {
 
     return (
         <div>
-            <input style={{color:"black"}} onChange={handleChange}type="text"></input>
-            <button style={{color:"black"}} type="submit" onClick={(e)=>{handleSubmit(e)}}>Enter</button>
+            <input onChange={handleChange}type="text"></input>
+            <button type="submit" onClick={(e)=>{handleSubmit(e)}}>Enter</button>
             <div><h3>{answer}</h3></div>
         </div>
     )

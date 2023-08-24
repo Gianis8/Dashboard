@@ -16,25 +16,14 @@ const Weather = () => {
 
     const weather = useSelector(selectWeather)
 
-    const [selected, setSelected] = useState("Yonkers")
-
-
-
-
     const handleClick = (e) => {
-        setSelected(e.target.innerText)
         setCity(e.target.id)
     }
 
-
-
-
-
-
     return (
         <div className="p-6 m-4 max-w-md rounded-xl shadow-lg flex space-x-4 bg-primary">
-            {weather.loading ? <p className="font-mono">loading</p> : (
-                <div className="font-mono">
+            {weather.loading ? <p>loading</p> : (
+                <div>
                     <div className="flex max-w-sm justify-evenly">
                         <h2 id="Yonkers" className="text-xl text-secondary hover:text-sky-600" onClick={(e) => (handleClick(e))}>Yonkers</h2>
                         <h2 id="Los_Angeles" className="text-xl text-secondary  hover:text-sky-600" onClick={(e) => (handleClick(e))}>Los Angeles</h2>
@@ -45,15 +34,15 @@ const Weather = () => {
                         <h3 className="">Humidty: {weather.data.current.humidity}</h3>
                     </div>
                     <section className=" max-w-sm">
-                        <ul className="flex m-3">
+                        <ul className="flex my-3">
                             {weather.data.hourly.slice(1, 6).map((hour) => {
-                                return <li key={hour.dt} className="m-3"><WeatherCard hour={hour} /></li>
+                                return <li key={hour.dt} className="m-2"><WeatherCard hour={hour}/></li>
                             })}
                         </ul>
-                        <ul id="hourly-weather" className="flex m-3">
+                        <ul id="hourly-weather" className="flex my-3 ">
                             {weather.data.daily.slice(1, 6).map((day) => {
                                 return (
-                                    <li key={day.dt} className="m-4"><WeatherCardDaily day={day} /></li>
+                                    <li key={day.dt} className="m-2 "><WeatherCardDaily day={day} /></li>
 
                                 )
                             })}

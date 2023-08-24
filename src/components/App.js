@@ -1,17 +1,17 @@
 import React from 'react';
 import ToDos from './ToDos';
 import Weather from './Weather';
-import MyCalendar from './MyCalender';
-import Chat from './Chat';
+import Calendar from './Calendar';
+// import Chat from './Chat';
 
 
 function App() {
   return (
-    <div id="app">
+    <div className='font-display flex'>
       <Weather></Weather>
-      {/* <MyCalendar /> */}
       {/* <Chat></Chat> */}
       <ToDos></ToDos>
+      <Calendar />
     </div>
   );
 }
