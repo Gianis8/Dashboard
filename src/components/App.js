@@ -7,7 +7,7 @@ import Calendar from './Calendar';
 
 function App() {
   return (
-    <div className='font-display flex'>
+    <div className='font-display flex flex-wrap'>
       <Weather></Weather>
       {/* <Chat></Chat> */}
       <ToDos></ToDos>
