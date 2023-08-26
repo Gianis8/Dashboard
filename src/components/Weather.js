@@ -21,13 +21,13 @@ const Weather = () => {
     }
 
     return (
-        <div className="p-6 m-4 max-w-md rounded-xl shadow-lg flex space-x-4 bg-primary">
+        <div className="p-6 m-4 h-md w-lg rounded-xl shadow-lg flex space-x-4 bg-primary">
             {weather.loading ? <p>loading</p> : (
                 <div>
                     <div className="flex max-w-sm justify-evenly">
-                        <h2 id="Yonkers" className="text-xl text-secondary hover:text-sky-600" onClick={(e) => (handleClick(e))}>Yonkers</h2>
-                        <h2 id="Los_Angeles" className="text-xl text-secondary  hover:text-sky-600" onClick={(e) => (handleClick(e))}>Los Angeles</h2>
-                        <h2 id="Dublin" className="text-xl text-secondary hover:text-sky-600" onClick={(e) => (handleClick(e))}>Dublin</h2>
+                        <h2 id="Yonkers" className="text-xl text-secondary hover:text-ternary focus:text-ternary" onClick={(e) => (handleClick(e))}>Yonkers</h2>
+                        <h2 id="Los_Angeles" className="text-xl text-secondary  hover:text-ternary" onClick={(e) => (handleClick(e))}>Los Angeles</h2>
+                        <h2 id="Dublin" className="text-xl text-secondary hover:text-ternary" onClick={(e) => (handleClick(e))}>Dublin</h2>
                     </div>
                     <div className="max-w-sm my-5">
                         <h3 className="max-w-sm">{Math.round(weather.data.current.temp)}°F</h3>

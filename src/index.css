@@ -4,11 +4,11 @@
 
 @layer components {
     .btn-done {
-        @apply flex bg-green-500 p-3 border-2 border-slate-400 rounded my-3;
+        @apply flex bg-ternary p-3 border-2 border-ternary rounded my-3;
     }
 
     .btn {
-        @apply flex p-3 border-2 border-slate-400 rounded my-3;
+        @apply flex p-3 border-2 border-secondary rounded my-3;
     }
 }
 
@@ -16,6 +16,4 @@ input::placeholder {
     color: slategray;
 }
 
-body {
-    background-color: rgb(13, 13, 16);
-}
+

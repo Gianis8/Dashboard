@@ -7,9 +7,10 @@ module.exports = {
         display:["Fira Sans", "sans-serif"]
       },
       colors: {
-        primary:"#E0DFD5" ,
-        secondary:'#0d0a0b' ,
-        ternary: "#f5f5f5",
+        primary:"#fafaff" ,
+        secondary:'04080f' ,
+        ternary: "#8a4fff",
+        fourth: "#623cea"
       }
     },
   },

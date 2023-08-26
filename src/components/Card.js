@@ -31,8 +31,8 @@ const Card = (props) => {
             <div className="grow relative">
                 <h1 className="my-2 w-32">{props.task}</h1>
             </div>
-            <button className="my-1px p-1 px-3 border-2 rounded hover:bg-green-500"onClick={handleDone}>{done ? "Undo" : "Done"}</button>
-            <button className="my-1px mx-2 p-1 px-3 border-2 rounded"onClick={handleDelete}>Delete</button>
+            <button className="my-1px p-1 px-3 border-2 border-secondary rounded-lg hover:bg-ternary"onClick={handleDone}>{done ? "Undo" : "Done"}</button>
+            <button className="my-1px mx-2 p-1 px-3 border-2 rounded-lg hover:bg-ternary"onClick={handleDelete}>Delete</button>
         </div>
     )
 }
