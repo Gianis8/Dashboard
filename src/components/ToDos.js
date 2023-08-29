@@ -6,15 +6,15 @@ import AddTask from './AddTask'
 
 const ToDos = () => {
     const tasks = useSelector(selectTasks)
-    
+
     return (
-        <div className='flex-col rounded-xl shadow-lg h-72 max-w-md m-4 p-4 bg-primary'>
-        <AddTask></AddTask>
-        <ul className="m-2">{
-            tasks.map((task) => {
-                return <Card task={task}></Card>
-            })
-        }</ul>
+        <div className='flex flex-col  rounded-xl shadow-lg w-1/3 m-4 p-4 bg-primary border-2 items-center'>
+            <AddTask></AddTask>
+            <ul className="m-2 w-full border-2">{
+                tasks.map((task) => {
+                    return <Card task={task}></Card>
+                })
+            }</ul>
         </div>
     )
 }

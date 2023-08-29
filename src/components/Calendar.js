@@ -20,7 +20,7 @@ import {
 import { useState } from 'react'
 
 
-const meetings = [
+let meetings = [
   {
     id: 1,
     name: 'Leslie Alexander',
@@ -74,7 +74,7 @@ export default function Example() {
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
-
+  console.log(today)
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -97,9 +97,6 @@ export default function Example() {
 
   const [shown, setShown] = useState("invisible")
 
-  const handleAdd = () => {
-
-  }
   const handleForm = () => {
     if (shown === "invisible") {
       setShown("")
@@ -109,26 +106,20 @@ export default function Example() {
   }
 
   const [startDate, setStartDate] = useState(new Date())
-  
-  console.log(selectedDayMeetings)
+  const [event, setEvent] = useState({})
+
+  console.log(event)
+
+  const handleAdd = () => {
+    let e = { ...event, date: startDate }
+    meetings.push(e)
+  }
 
   return (
-    <div className="pt-4 min-w-lg bg-primary rounded-xl m-4 text-secondary shadow-lg flex max-w-4xl p-6 border-2 border-secondary">
-
+    <div className="pt-4 min-w-lg bg-primary rounded-xl m-4 text-secondary shadow-lg flex max-w-4xl p-6 border-2 border-secondary relative">
       <div className="border-r-4 border-secondary px-6">
-        <section className="scale-0">
-        </section>
         <div className="flex items-center justify-evenly">
-          <div className='' >
-            <FontAwesomeIcon icon={faPlus} onClick={handleForm} className='peer hover:cursor-pointer hover:text-fourth text-ternary' />
-            <div className={`${shown} bg-primary h-72 w-lg absolute border-2 border-secondary rounded-lg p-2`}>
-              <div className='flex flex-col'>
-                <input className="rounded border-2 border-secondary" type="text" placeholder="Title"></input>
-                <textarea className="rounded border-2 border-secondary resize-none" type="text" placeholder="Description" name="desc" cols={18} rows={3}></textarea>
-              </div>
-              <DatePicker selected={startDate} onChange={(date)=>setStartDate(date)}/>
-            </div>
-          </div>
+          <FontAwesomeIcon icon={faPlus} onClick={handleForm} className='peer hover:cursor-pointer hover:text-fourth text-ternary' />
           <h2 className="flex-auto font-display text-secondary text-center">
             {format(firstDayCurrentMonth, 'MMMM yyyy')}
           </h2>
@@ -137,13 +128,11 @@ export default function Example() {
             onClick={previousMonth}
             className="mx-2 items-center justify-center p-1.5 text-ternary hover:text-fourth cursor-pointer"
           />
-
           <FontAwesomeIcon icon={faChevronRight}
             onClick={nextMonth}
             type="button"
             className="mx-2 items-center justify-center p-1.5 text-ternary hover:text-fourth cursor-pointer"
           />
-
         </div>
         <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
           <div>S</div>
@@ -212,7 +201,7 @@ export default function Example() {
             return (
               <li>
                 <p>{meeting.name}</p>
-                <image src={meeting.imageUrl}></image>
+                <p>{format(meeting.startDatetime,"h a")}</p>
               </li>
             )
           })
@@ -220,7 +209,12 @@ export default function Example() {
           }
         </ul>
       </section>
-
+      <div className={`${shown} bg-primary h-72 w-lg absolute right-6 top-10 border-2 border-secondary rounded-lg p-2 flex flex-col justify-evenly`}>
+        <h2>{`${format(selectedDay, 'MMM do, yyyy')}`}</h2>
+        <input className="rounded border-2 border-secondary" type="text" placeholder="Title" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
+        <textarea className="rounded border-2 border-secondary resize-none" type="text" placeholder="Description" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
+        <button onClick={handleAdd}>Submit</button>
+      </div>
     </div>
   )
 }
