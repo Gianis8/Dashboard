@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
     .btn-done {
         @apply flex bg-ternary p-3 border-2 border-ternary rounded my-3;

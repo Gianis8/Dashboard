@@ -18,6 +18,7 @@ import {
   formatISO
 } from 'date-fns'
 import { useState } from 'react'
+import { TimePicker } from '@mui/x-date-pickers'
 
 let meetings = [];
 
@@ -61,7 +62,7 @@ export default function Example() {
     }
   }
 
-  
+
   const [event, setEvent] = useState({
     startDatetime: '',
     endDatetime: '',
@@ -81,15 +82,16 @@ export default function Example() {
   }
 
   const handleFormat = (time) => {
-    let hours = time.slice(0, 2)
-    let min = time.slice(3, 5)
-    const DT = formatISO(add(selectedDay, { hours: hours, minutes: min }))
-    return DT
+    console.log(time)
+    // let hours = time.slice(0, 2)
+    // let min = time.slice(3, 5)
+    // const DT = formatISO(add(selectedDay, { hours: hours, minutes: min }))
+    // return DT
   }
 
   return (
     <div className="pt-4 min-w-lg bg-primary rounded-xl m-4 text-secondary shadow-lg flex max-w-4xl p-6 border-2 border-secondary relative">
-      <div className="border-r-4 border-secondary px-6">
+      <div className="border-r-2 border-secondary px-6">
         <div className="flex items-center justify-evenly">
           <FontAwesomeIcon icon={faPlus} onClick={handleForm} className='peer hover:cursor-pointer hover:text-fourth text-ternary' />
           <h2 className="flex-auto font-display text-secondary text-center">
@@ -185,22 +187,16 @@ export default function Example() {
           }
         </ul>
       </section>
-      <div className={`${shown} bg-primary h-72 w-lg absolute right-6 top-10 border-2 border-secondary rounded-lg p-2 flex flex-col justify-evenly`}>
-        <h2>{`${format(selectedDay, 'MMM do, yyyy')}`}</h2>
+      <div className={`${shown} bg-primary h-80 w-64 absolute right-6 top-9 border-2 border-secondary rounded-lg p-2 flex flex-col justify-evenly`}>
         <form onSubmit={handleSubmit} className='flex flex-col'>
+          <input id="title" className="rounded m-2 bg-primary border-b-2 border-secondary h-10 text-md" type="text" placeholder="Event" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
+          <TimePicker label="Start" onChange={(e) => { setEvent({ ...event, startDatetime: formatISO(e) }) }
+          } />
+          <TimePicker label="End" onChange={(e) => { setEvent({ ...event, endDatetime: formatISO(e) }) }
+          } />
           <div>
-            <input id="start" type="time" className='w-22 m-2 border-2 border-secondary rounded-md' onChange={
-              (e) => {
-                setEvent({ ...event, startDatetime: handleFormat(e.target.value) })
-              }
-            }></input>
-            <input id="end" type="time" className='w-22 m-2 border-2 border-secondary rounded-md' onChange={(e) => {
-              setEvent({ ...event, endDatetime: handleFormat(e.target.value) })
-            }
-            }></input>
+            <textarea id="description" className="rounded m-2 bg-primary border-b-2 border-secondary resize-none align-baseline" type="text" placeholder="Notes" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
           </div>
-          <input id="title"  className="rounded border-2 border-secondary" type="text" placeholder="Title" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
-          <textarea id="description" className="rounded border-2 border-secondary resize-none" type="text" placeholder="Description" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
           <button type="submit" onClick={(e) => { handleAdd(e); setEvent({}) }}>Submit</button>
         </form>
       </div>
