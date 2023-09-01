@@ -1,7 +1,6 @@
 
 import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import {
   add,
@@ -16,54 +15,11 @@ import {
   parse,
   parseISO,
   startOfToday,
+  formatISO
 } from 'date-fns'
 import { useState } from 'react'
 
-
-let meetings = [
-  {
-    id: 1,
-    name: 'Leslie Alexander',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2023-08-01T13:00',
-    endDatetime: '2023-08-01T14:30',
-  },
-  {
-    id: 2,
-    name: 'Michael Foster',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2023-08-02T09:00',
-    endDatetime: '2023-08-02T11:30',
-  },
-  {
-    id: 3,
-    name: 'Dries Vincent',
-    imageUrl:
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2023-08-03T17:00',
-    endDatetime: '2023-08-03T18:30',
-  },
-  {
-    id: 4,
-    name: 'Leslie Alexander',
-    imageUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2023-08-09T13:00',
-    endDatetime: '2023-08-09T14:30',
-  },
-  {
-    id: 5,
-    name: 'Michael Foster',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    startDatetime: '2023-08-13T14:00',
-    endDatetime: '2023-08-13T14:30',
-  },
-];
-
-
+let meetings = [];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -74,7 +30,7 @@ export default function Example() {
   let [selectedDay, setSelectedDay] = useState(today)
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
-  console.log(today)
+
 
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
@@ -105,14 +61,30 @@ export default function Example() {
     }
   }
 
-  const [startDate, setStartDate] = useState(new Date())
-  const [event, setEvent] = useState({})
+  
+  const [event, setEvent] = useState({
+    startDatetime: '',
+    endDatetime: '',
+    title: '',
+    description: ''
+  })
 
   console.log(event)
 
-  const handleAdd = () => {
-    let e = { ...event, date: startDate }
-    meetings.push(e)
+  const handleAdd = (e) => {
+    meetings.push(event)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    e.target.reset()
+  }
+
+  const handleFormat = (time) => {
+    let hours = time.slice(0, 2)
+    let min = time.slice(3, 5)
+    const DT = formatISO(add(selectedDay, { hours: hours, minutes: min }))
+    return DT
   }
 
   return (
@@ -159,7 +131,7 @@ export default function Example() {
                   isEqual(day, selectedDay) && 'text-white',
                   !isEqual(day, selectedDay) &&
                   isToday(day) &&
-                  'text-red-500',
+                  'text-ternary',
                   !isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   isSameMonth(day, firstDayCurrentMonth) &&
@@ -168,10 +140,10 @@ export default function Example() {
                   !isToday(day) &&
                   !isSameMonth(day, firstDayCurrentMonth) &&
                   'text-gray-400',
-                  isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
+                  isEqual(day, selectedDay) && isToday(day) && 'bg-ternary',
                   isEqual(day, selectedDay) &&
                   !isToday(day) &&
-                  'bg-gray-900',
+                  'bg-ternary',
                   !isEqual(day, selectedDay) && 'hover:bg-gray-200',
                   (isEqual(day, selectedDay) || isToday(day)) &&
                   'font-semibold',
@@ -197,11 +169,15 @@ export default function Example() {
       <section className="bg-primary mx-4">
         <ul className='w-60'>
           {selectedDayMeetings.map((meeting) => {
-            console.log(meeting)
+            let start = new Date(meeting.startDatetime)
+            console.log(start)
+
+            let end = new Date(meeting.endDatetime)
+            console.log(end)
             return (
               <li>
-                <p>{meeting.name}</p>
-                <p>{format(meeting.startDatetime,"h a")}</p>
+                <p>{meeting.title}</p>
+                <p>{format(start, 'h:mm a') + " - " + format(end, "h:mm a")}</p>
               </li>
             )
           })
@@ -211,9 +187,22 @@ export default function Example() {
       </section>
       <div className={`${shown} bg-primary h-72 w-lg absolute right-6 top-10 border-2 border-secondary rounded-lg p-2 flex flex-col justify-evenly`}>
         <h2>{`${format(selectedDay, 'MMM do, yyyy')}`}</h2>
-        <input className="rounded border-2 border-secondary" type="text" placeholder="Title" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
-        <textarea className="rounded border-2 border-secondary resize-none" type="text" placeholder="Description" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
-        <button onClick={handleAdd}>Submit</button>
+        <form onSubmit={handleSubmit} className='flex flex-col'>
+          <div>
+            <input id="start" type="time" className='w-22 m-2 border-2 border-secondary rounded-md' onChange={
+              (e) => {
+                setEvent({ ...event, startDatetime: handleFormat(e.target.value) })
+              }
+            }></input>
+            <input id="end" type="time" className='w-22 m-2 border-2 border-secondary rounded-md' onChange={(e) => {
+              setEvent({ ...event, endDatetime: handleFormat(e.target.value) })
+            }
+            }></input>
+          </div>
+          <input id="title"  className="rounded border-2 border-secondary" type="text" placeholder="Title" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
+          <textarea id="description" className="rounded border-2 border-secondary resize-none" type="text" placeholder="Description" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
+          <button type="submit" onClick={(e) => { handleAdd(e); setEvent({}) }}>Submit</button>
+        </form>
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ const Weather = () => {
     }
 
     return (
-        <div className="p-6 m-4 rounded-xl shadow-lg flex space-x-4 bg-primary h-1/3 w-1/3 border-2">
+        <div className="min-w-md p-6 m-4 rounded-xl shadow-lg flex space-x-4 bg-primary h-1/3 w-1/3 border-2">
             {weather.loading ? <p>loading</p> : (
                 <div>
                     <div className="flex max-w-sm justify-evenly">

@@ -8,7 +8,7 @@ const ToDos = () => {
     const tasks = useSelector(selectTasks)
 
     return (
-        <div className='flex flex-col  rounded-xl shadow-lg w-1/3 m-4 p-4 bg-primary border-2 items-center'>
+        <div className='min-w-md flex flex-col  rounded-xl shadow-lg w-1/3 m-4 p-4 bg-primary max-w-2xl border-2 items-center relative'>
             <AddTask></AddTask>
             <ul className="m-2 w-full border-2">{
                 tasks.map((task) => {
