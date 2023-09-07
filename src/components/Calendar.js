@@ -73,6 +73,7 @@ export default function Example() {
   console.log(event)
 
   const handleAdd = (e) => {
+    console.log("event:", event)
     meetings.push(event)
   }
 
@@ -90,7 +91,7 @@ export default function Example() {
   }
 
   return (
-    <div className="pt-4 min-w-lg bg-primary rounded-xl m-4 text-secondary shadow-lg flex max-w-4xl p-6 border-2 border-secondary relative">
+    <div className="pt-4 min-w-lg  bg-primary rounded-xl m-4 text-secondary shadow-lg flex max-w-4xl p-6 border-2 border-secondary relative">
       <div className="border-r-2 border-secondary px-6">
         <div className="flex items-center justify-evenly">
           <FontAwesomeIcon icon={faPlus} onClick={handleForm} className='peer hover:cursor-pointer hover:text-fourth text-ternary' />
@@ -190,14 +191,14 @@ export default function Example() {
       <div className={`${shown} bg-primary h-80 w-64 absolute right-6 top-9 border-2 border-secondary rounded-lg p-2 flex flex-col justify-evenly`}>
         <form onSubmit={handleSubmit} className='flex flex-col'>
           <input id="title" className="rounded m-2 bg-primary border-b-2 border-secondary h-10 text-md" type="text" placeholder="Event" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
-          <TimePicker label="Start" onChange={(e) => { setEvent({ ...event, startDatetime: formatISO(e) }) }
-          } />
-          <TimePicker label="End" onChange={(e) => { setEvent({ ...event, endDatetime: formatISO(e) }) }
-          } />
+          <div className='flex flex-col p-2 justify-between h-32 '>
+            <TimePicker label="Start" slotProps={{textField:{variant:'filled'}}} defaultValue={selectedDay} openTo="hours" onChange={(e) => { setEvent({ ...event, startDatetime: e }) }} />
+            <TimePicker label="End" slotProps={{textField:{variant:'filled'}}}defaultValue={selectedDay} openTo="hours" onChange={(e) => { setEvent({ ...event, endDatetime: e }) }} />
+          </div>
           <div>
             <textarea id="description" className="rounded m-2 bg-primary border-b-2 border-secondary resize-none align-baseline" type="text" placeholder="Notes" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
           </div>
-          <button type="submit" onClick={(e) => { handleAdd(e); setEvent({}) }}>Submit</button>
+          <button type="submit" onClick={() => { handleAdd(); setEvent({}) }}>Submit</button>
         </form>
       </div>
     </div>
