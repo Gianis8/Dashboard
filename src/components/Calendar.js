@@ -1,5 +1,6 @@
 
 import { faChevronRight, faChevronLeft, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { createTheme } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "react-datepicker/dist/react-datepicker.css"
 import {
@@ -193,7 +194,7 @@ export default function Example() {
           <input id="title" className="rounded m-2 bg-primary border-b-2 border-secondary h-10 text-md" type="text" placeholder="Event" onChange={(e) => setEvent({ ...event, title: e.target.value })}></input>
           <div className='flex flex-col p-2 justify-between h-32 '>
             <TimePicker label="Start" slotProps={{textField:{variant:'filled'}}} defaultValue={selectedDay} openTo="hours" onChange={(e) => { setEvent({ ...event, startDatetime: e }) }} />
-            <TimePicker label="End" slotProps={{textField:{variant:'filled'}}}defaultValue={selectedDay} openTo="hours" onChange={(e) => { setEvent({ ...event, endDatetime: e }) }} />
+            <TimePicker sx={{background:'#fafaff'}}label="End" slotProps={{textField:{variant:'filled'}}}defaultValue={selectedDay} openTo="hours" onChange={(e) => { setEvent({ ...event, endDatetime: e }) }} />
           </div>
           <div>
             <textarea id="description" className="rounded m-2 bg-primary border-b-2 border-secondary resize-none align-baseline" type="text" placeholder="Notes" name="desc" cols={18} rows={3} onChange={(e) => setEvent({ ...event, description: e.target.value })}></textarea>
