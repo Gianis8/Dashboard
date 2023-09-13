@@ -14,7 +14,22 @@
 }
 
 input::placeholder {
-    color: slategray;
+    
+    color: #04080f;
+}
+input:focus {
+    outline: 0;
+    border-color: #8a4fff;
+}
+
+textarea::placeholder{
+    outline: 0;
+    color: #04080f;
+}
+
+textarea:focus {
+    outline: 0;
+    border-color: #8a4fff;
 }
 
 

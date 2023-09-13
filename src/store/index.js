@@ -4,16 +4,17 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import  todoSlice  from './ToDoslice'
 import weatherSlice from './weatherSlice'
-import openaiSlice from './OpenAiSlice'
+import openAiSlice from './OpenAiSlice'
 
 
 
 // main redux store
 const store = configureStore({
   reducer: {
+    openai: openAiSlice,
     todo:todoSlice,
     weather:weatherSlice,
-    openai:openaiSlice
+    
   },
 
   middleware: (getDefaultMiddleware) =>

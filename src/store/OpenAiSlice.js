@@ -2,27 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchChat = createAsyncThunk("fetchChat", async (prompt) => {
-
-
     const { data } = await axios({
         method: "post",
         url: "http://localhost:5000/chat",
         data: {
             prompt: `${prompt}`,
         }
-
     })
-    const response = data
-    console.log(response)
-    return { ...response }
+    console.log(data)
+    return data
 })
 
 const initialState = {
     prompt: "Hi Ian",
-    answer: {}
+    answer: {},
+    loading: true
 }
 
-const openaiSlice = createSlice({
+export const openAiSlice = createSlice({
     name: "openai",
     initialState,
     reducers: {},
@@ -31,9 +28,11 @@ const openaiSlice = createSlice({
             console.log("fulffilled")
             console.log(action.payload.data)
             state.answer = action.payload
+            state.loading = false
         })
         builder.addCase(fetchChat.pending, (state, action) => {
             console.log("pending")
+            state.loading = true
         })
     }
 })
@@ -42,8 +41,12 @@ export const selectPrompt = (state, action) => {
     return state.prompt
 }
 
+export const selectLoading = (state,action) => {
+    return state.loading
+}
+
 export const selectAnswer = (state, action) => {
     return state.answer
 }
 
-export default openaiSlice
+export default openAiSlice.reducer

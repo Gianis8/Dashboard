@@ -21,6 +21,7 @@ app.post("/chat", async (req,res) => {
         const response = await openai.createCompletion({
             model:"text-davinci-003",
             prompt:`${prompt}`,
+            temperature:0.2,
 
         }) 
 

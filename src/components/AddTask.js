@@ -24,8 +24,8 @@ export const AddTask = () => {
     }
 
     return (
-        <div className="flex w-72 justify-evenly h-7 border-2">
-            <input className=" p-1 rounded shadow-sm text-secondary outline-secondary"type="text" placeholder="To Do" name="task" value={title} onChange={handleChange} ></input>
+        <div className="flex w-72 justify-evenly h-7">
+            <input className=" p-1 text-secondary border-b-2 border-primary"type="text" placeholder="To Do" name="task" value={title} onChange={handleChange} ></input>
             <FontAwesomeIcon icon={faPlus} className="text-ternary  h-5" onClick={(e) => { handleClick(e) }}>Add</FontAwesomeIcon>
         </div>
 
