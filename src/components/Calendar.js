@@ -71,8 +71,6 @@ export default function Example() {
     description: ''
   })
 
-  console.log(event)
-
   const handleAdd = (e) => {
     console.log("event:", event)
     meetings.push(event)

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { selectAnswer, fetchChat, selectLoading } from "../store/OpenAiSlice";
+import { selectAnswer, fetchChat, selectLoading, fetchTurbo } from "../store/OpenAiSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Chat = () => {
@@ -8,13 +8,15 @@ const Chat = () => {
     const [question, setQuestion] = useState('')
     
     const loading = useSelector(selectLoading)
-    const answer = useSelector(selectAnswer)
+    let answer = useSelector(selectAnswer)
 
+    useEffect(()=>{
+        
+    },[loading, answer])
     
 
     const handleChange = (e) =>{
         e.preventDefault()
-        console.log(e.target.value)
         setQuestion(e.target.value)
     }
 
@@ -23,14 +25,14 @@ const Chat = () => {
         console.log(question)
         dispatch(fetchChat(question))
     }
-
-    console.log("Answer useStae:", answer)
+    // console.log(loading)
+    // console.log("Answer useState:", answer)
 
     return (
-        <div className="border-2 rounded-xl m-4 p-2 shadow-md">
+        <div className=" flex flex-col border-2 rounded-xl m-4 p-2 shadow-md w-72">
             <input className=" p-1 border-b-2 border-primary" onChange={handleChange}type="text"></input>
             <button type="submit" onClick={(e)=>{handleSubmit(e)}}>Enter</button>
-            <div><h3>{answer}</h3></div>
+            <div className="h-56">{loading ? <p>loading</p> : <h3>{`${answer}`}</h3>}</div>
         </div>
     )
 

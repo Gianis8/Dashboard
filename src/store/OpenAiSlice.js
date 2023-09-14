@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
+
 export const fetchChat = createAsyncThunk("fetchChat", async (prompt) => {
     const { data } = await axios({
         method: "post",
@@ -9,7 +11,7 @@ export const fetchChat = createAsyncThunk("fetchChat", async (prompt) => {
             prompt: `${prompt}`,
         }
     })
-    console.log(data)
+
     return data
 })
 
@@ -26,8 +28,8 @@ export const openAiSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchChat.fulfilled, (state, action) => {
             console.log("fulffilled")
-            console.log(action.payload.data)
-            state.answer = action.payload
+            console.log('returned from thunk:',action.payload.data.choices[0].message.content)
+            state.answer = action.payload.data.choices[0].message.content
             state.loading = false
         })
         builder.addCase(fetchChat.pending, (state, action) => {
@@ -41,12 +43,13 @@ export const selectPrompt = (state, action) => {
     return state.prompt
 }
 
-export const selectLoading = (state,action) => {
-    return state.loading
+export const selectLoading = (state, action) => {
+    return state.openai.loading
 }
 
 export const selectAnswer = (state, action) => {
-    return state.answer
+    console.log(state.openai.answer)
+    return state.openai.answer
 }
 
 export default openAiSlice.reducer

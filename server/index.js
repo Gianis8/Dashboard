@@ -9,7 +9,8 @@ app.use(express.json())
 app.use(cors({origin:'http://localhost:3000'}))
 
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_AI_KEY
+    organization:"org-1ECdRlhgkgpbTukNdG1EzOdX",
+    apiKey: process.env.OPENAI_API_KEY
 })
 
 const openai = new OpenAIApi(configuration)
@@ -18,21 +19,21 @@ app.post("/chat", async (req,res) => {
     try {
         const { prompt } = req.body;
         
-        const response = await openai.createCompletion({
-            model:"text-davinci-003",
-            prompt:`${prompt}`,
-            temperature:0.2,
+        const {data} = await openai.createChatCompletion({
+            model:"gpt-3.5-turbo",
+            messages:[{'role':'system','content':'You are a helpful assisstant'},{'role':'user', 'content':`${prompt}`}]
 
         }) 
-
+        console.log(data)
         return res.status(200).json({
             success: true,
-            data: response.data.choices[0].text
+            data: data
         })
     } catch (error) {
+        console.log(error)
         return res.status(400).json({
         success: false,
-        error: error.response ? error.response.data : "there was an issue on te server"
+        error: error
 })
     }
 })
